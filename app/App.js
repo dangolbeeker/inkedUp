@@ -1,26 +1,36 @@
-import React from 'react';
-import * as tf from '@tensorflow/tfjs';
-import '@tensorflow/tfjs-react-native';
+// import * as tf from '@tensorflow/tfjs';
+// import '@tensorflow/tfjs-react-native';
 
-export class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isTfReady: false,
-    };
-  }
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-  async componentDidMount() {
-    // Wait for tf to be ready.
-    await tf.ready();
-    // Signal to the app that tensorflow.js can now be used.
-    this.setState({
-      isTfReady: true,
-    });
-  }
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
 
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
 
-  render() {
-    //
-  }
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 }
